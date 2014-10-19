@@ -1,0 +1,4 @@
+
+# dcm2nii.ini
+
+createoutputfolder=1 # original 0

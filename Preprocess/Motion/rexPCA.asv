@@ -1,0 +1,50 @@
+
+function dataPCA=rexPCA(Data,Options)
+
+if ~isfield(Options,'PCADim')||isempty(Options.PCADim), error('please specify PCA dimension\n'); end
+
+[AllVolume]=dzReadData_file(Data,Options);
+
+nBlock=10; if isfield(Options,'nBlock')&&~isempty(Options.nBlock)&&Options.nBlock>0, nBlock=Options.nBlock; end
+
+[nTp,nVox]=size(AllVolume); BlockSize=floor(nVox/nBlock);
+fprintf('PCA computing\n');
+for bb=1:nBlock
+    % Blockmize
+    left=(bb-1)*BlockSize+1; right=bb*BlockSize; if bb==nBlock, right=nVox; end
+    tmpData=AllVolume(:,left:right);
+    
+    % rexPCA - step1, compute covariance
+    dataMean = zeros(1,size(tmpData,2));
+    dataCov  = zeros(nTp,nTp); % Covariance of tmpData
+    % nan replaced by mean
+    if(any(isnan(tmpData)))
+        nanMat = find(isnan(tmpData));
+        tmpData(nanMat) = 0;
+        dataMean = sum(tmpData,1)./max(eps,sum(~nanMat,1)); % if all nan ,than very large
+        tmpData(nanMat) = dataMean();
+    else
+        datamean = mean(tmpData,1);
+    end
+    % covariance
+    if bb==1, fprintf(' computing covariance structure\n\t'); end
+    fprintf('.');
+    dataCov = dataCov + tmpData * tmpData';
+end
+fprintf('\n');
+% rexPCA - step2, svd & dim
+fprintf(' comp\n\t');
+[q1,q2,nill]=svd(dataCov); clear dataCov;
+if Options.PCADim>size(q1,2), fprintf('!!!warning: specified dimension exceeds maximum dimension'); end
+Dim=min(size(q1,2),Options.PCADim);
+dataPCA=q1(:,1:Dim)*diag(sqrt(diag(q2(1:Dim,1:Dim))));
+% rexPCA - step3,
+basis=rexPCA_step3(dataPCA,AllVolume); % C version
+% rexPCA - step4,
+basis=basis*diag(1./max(eps,sqrt(sum(basis.^2,1))));
+tmpSgn=sign(sum(basis,1))./max(eps,sum(abs(basis),1));
+dataPCA=dataPCA*diag(tmpSgn);
+
+return
+end
+
