@@ -1,3 +1,5 @@
+﻿﻿
+
 Atom
 ====
 
@@ -23,3 +25,4 @@ References:
   Reduction of motion-related artifacts in resting state fMRI using aCompCor. John Muschellia etal. NeuroImage. 2014;96;22:35
   A comprehensive assessment of regional variation in the impact of head micromovements on functional connectomics. Chao-Gan Yan etal. NeuroImage. 2013;76;183:201
   Spurious but systematic correlations in functional connectivity MRI networks arise from subject motion. Jonathan D. Power etal. NeuroImage. 2012;59;2142–2154
+
