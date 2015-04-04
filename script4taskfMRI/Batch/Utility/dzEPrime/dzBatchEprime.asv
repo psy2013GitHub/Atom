@@ -1,0 +1,18 @@
+
+
+clear; clc;
+%-------------------------------------------------------------------------%
+
+SubjectDir='J:\temp\EmoConf_txt'; % E-prime??????
+OutputDir=pwd;       % ??????
+minRT=[];            % ?????
+maxRT=[];            % ?????
+nStd=[-2,2];             % ?????
+Attribute='sti';
+Prefix='stimulus';
+Options.Operations.RT =[{}];
+Options.Operations.ACC=['';
+
+
+%-------------------------------------------------------------------------%
+dzLoopDirectory(SubjectDir,OutputDir,Attribute,Prefix,minRT,maxRT,nStd,0,Options);
