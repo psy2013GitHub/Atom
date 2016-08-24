@@ -9,7 +9,7 @@
 </p>
 <p>
 	<br />
-	Developed by <span style="font-size:14px;"><strong>Zhou Deng</strong> </span>(<a href="mailto:superdengzhou@163.com">superdengzhou@163.com</a>) &amp; <span style="font-size:14px;"><strong>Jingxue Qin</strong> </span>(<a href="mailto:qinjingxue1989@163.com">qinjingxue1989@163.com</a>).
+	Developed by <span style="font-size:14px;"><strong>Zhou Deng</strong> </span>(<a href="mailto:superdengzhou@163.com">superdengzhou@163.com</a>)
 </p>
 <p>
 	<br />
